@@ -22,7 +22,6 @@
 	const over = (ev: Event) => {
 		ev.preventDefault();
 		let dragged = getDraggedParent(ev.target);
-		console.log(dragged);
 		if (isOver !== dragged.index) isOver = JSON.parse(dragged.index);
 	};
 	const leave = (ev: Event) => {

@@ -1,3 +1,4 @@
-import { writable } from 'svelte/store';
+import type { Game } from 'src/types';
+import { writable, type Writable } from 'svelte/store';
 
-export const sortedGameStore = writable();
+export const sortedGameStore: Writable<Game[]> = writable();
