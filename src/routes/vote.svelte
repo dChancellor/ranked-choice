@@ -38,8 +38,6 @@
 
 	const sortedGames = games.reduce((arr: Game[], game) => {
 		const rank = rankings.ordered_games.findIndex((name) => name === game.name);
-		console.log(game.name, rank);
-
 		if (rank !== -1) {
 			arr[rank] = game;
 		} else {
@@ -47,8 +45,6 @@
 		}
 		return arr;
 	}, Array(5));
-	console.log(sortedGames);
-
 	sortedGameStore.set(sortedGames);
 	const saveVotes = async () => {
 		const vote = $sortedGameStore.reduce((arr: string[], game: Game) => {
