@@ -22,7 +22,6 @@
 
 <main>
 	<a title="Discord OAuth2" href="api/auth">Login with Discord</a>
-	<button on:click={reload}>reload</button>
 </main>
 
 <style>
