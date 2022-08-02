@@ -2,6 +2,7 @@ import cookie from 'cookie';
 import config from '$lib/config';
 import type { RequestEvent } from '@sveltejs/kit';
 import type { MaybePromise } from '@sveltejs/kit/types/private';
+import { supabase } from '$lib/dbClient';
 
 /** @type {import('@sveltejs/kit').Handle} */
 export async function handle({
@@ -29,16 +30,22 @@ export async function handle({
 		const request = await fetch(`https://discordapp.com/api/users/@me`, {
 			headers: { Authorization: `Bearer ${cookies.access_token}` }
 		});
-
-		const response = await request.json();
-		event.locals.user = { ...response };
+		const response: User = await request.json();
+		const { error } = await supabase
+			.from('users')
+			.select(`username`)
+			.eq('username', response.username)
+			.single();
+		if (!error) {
+			event.locals.user = { ...response };
+		}
 	}
 
 	const response = await resolve(event);
 	return response;
 }
 
-// /** @type {import('@sveltejs/kit').GetSession} */
+/** @type {import('@sveltejs/kit').GetSession} */
 export async function getSession(event: RequestEvent) {
 	return {
 		user: event.locals.user

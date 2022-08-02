@@ -11,6 +11,14 @@ interface User {
 	public_flags?: number;
 }
 
+declare type DndEvent = import('svelte-dnd-action').DndEvent;
+declare namespace svelte.JSX {
+	interface HTMLAttributes<T> {
+		onconsider?: (event: CustomEvent<DndEvent> & { target: EventTarget & T }) => void;
+		onfinalize?: (event: CustomEvent<DndEvent> & { target: EventTarget & T }) => void;
+	}
+}
+
 // See https://kit.svelte.dev/docs/types#app
 // for information about these interfaces
 // and what to do when importing types

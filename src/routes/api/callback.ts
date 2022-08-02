@@ -7,7 +7,7 @@ import type { RequestEvent } from '@sveltejs/kit';
 export async function GET(event: RequestEvent) {
 	const returnCode = event.url.searchParams.get('code');
 	if (!returnCode) return { status: 500 };
-	const dataObject = {
+	const data = {
 		client_id: config.oauth.discord.clientId,
 		client_secret: config.oauth.discord.clientSecret,
 		grant_type: 'authorization_code',
@@ -18,7 +18,7 @@ export async function GET(event: RequestEvent) {
 
 	const request = await fetch('https://discord.com/api/oauth2/token', {
 		method: 'POST',
-		body: new URLSearchParams(dataObject),
+		body: new URLSearchParams(data),
 		headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
 	});
 
@@ -41,7 +41,7 @@ export async function GET(event: RequestEvent) {
 				`access_token=${response.access_token}; Path=/; HttpOnly; SameSite=Strict; Expires=${access_token_expires_in}}`,
 				`refresh_token=${response.refresh_token}; Path=/; HttpOnly; SameSite=Strict; Expires=${refresh_token_expires_in}`
 			],
-			Location: '/'
+			location: '/vote'
 		},
 		status: 302
 	};
