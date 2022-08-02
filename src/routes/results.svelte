@@ -58,7 +58,6 @@
 </script>
 
 <script lang="ts">
-	import { sortedGameStore } from '../store/games';
 	export let user: User;
 	export let winner: string;
 
