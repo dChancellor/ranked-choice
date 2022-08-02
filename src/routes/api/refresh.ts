@@ -1,6 +1,5 @@
 import config from '$lib/config';
 import type { RequestEvent } from '@sveltejs/kit';
-import axios from 'axios';
 
 /**
  * @type {import('@sveltejs/kit').RequestHandler}
@@ -24,18 +23,13 @@ export async function GET(event: RequestEvent) {
 	};
 
 	// get the tokens from discord to send eventually send back
-	// const request = await fetch('https://discord.com/api/oauth2/token', {
-	// 	method: 'POST',
-	// 	body: new URLSearchParams(data),
-	// 	headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-	// });
-
-	const body = new URLSearchParams(data);
-	const request = await axios.post('https://discord.com/api/oauth2/token', body, {
+	const request = await fetch('https://discord.com/api/oauth2/token', {
+		method: 'POST',
+		body: new URLSearchParams(data),
 		headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
 	});
 
-	const response = await request.data;
+	const response = await request.json();
 
 	if (response.error) {
 		return {

@@ -25,10 +25,7 @@ export async function handle({
 		const discordResponse = await discordRequest.data.json();
 
 		if (discordResponse.access_token) {
-			// const request: Response = await fetch(`https://discordapp.com/api/users/@me`, {
-			// 	headers: { Authorization: `Bearer ${discordResponse.access_token}` }
-			// });
-			const request: Response = await axios.get(`https://discordapp.com/api/users/@me`, {
+			const request: Response = await fetch(`https://discordapp.com/api/users/@me`, {
 				headers: { Authorization: `Bearer ${discordResponse.access_token}` }
 			});
 			const response = await request.json();
@@ -37,14 +34,11 @@ export async function handle({
 	}
 
 	if (cookies.access_token) {
-		// const request = await fetch(`https://discordapp.com/api/users/@me`, {
-		// 	headers: { Authorization: `Bearer ${cookies.access_token}` }
-		// });
-		const request = await axios.get(`https://discordapp.com/api/users/@me`, {
+		const request = await fetch(`https://discordapp.com/api/users/@me`, {
 			headers: { Authorization: `Bearer ${cookies.access_token}` }
 		});
 
-		const response: User = await request.data;
+		const response: User = await request.json();
 		const { error } = await supabase
 			.from('users')
 			.select(`username`)

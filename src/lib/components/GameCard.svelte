@@ -22,12 +22,12 @@
 	.gamecard {
 		width: 400px;
 		height: 100px;
-		background-color: #d1c1e7;
+		background-color: #3b3a3f;
 		border-radius: 18px;
 		display: flex;
 		flex-flow: row;
 		box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-		color: rgb(41, 36, 44);
+		color: rgb(249, 242, 253);
 		font-size: 1.4rem;
 		align-items: center;
 		overflow: hidden;

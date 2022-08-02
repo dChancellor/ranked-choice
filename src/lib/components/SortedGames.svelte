@@ -102,8 +102,8 @@
 		transform: translateY(-50%);
 	}
 	.dots {
-		fill: hsl(180, 19%, 20%);
-		stroke: hsl(180, 19%, 20%);
+		fill: hsl(293, 66%, 51%);
+		stroke: hsl(281, 98%, 67%);
 		stroke-width: 2px;
 		height: 2.5rem;
 		cursor: pointer;
