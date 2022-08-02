@@ -31,7 +31,6 @@
 
 <script lang="ts">
 	import { sortedGameStore } from '../store/games';
-	import { goto } from '$app/navigation';
 	import SortedGames from '$lib/components/SortedGames.svelte';
 	export let user: User;
 	export let games: Game[];

@@ -15,6 +15,7 @@ export async function GET(event: RequestEvent) {
 		code: returnCode,
 		scope: 'identify'
 	};
+	console.log('CODE', returnCode);
 
 	const request = await fetch('https://discord.com/api/oauth2/token', {
 		method: 'POST',
@@ -23,6 +24,7 @@ export async function GET(event: RequestEvent) {
 	});
 
 	const response = await request.json();
+	console.log('RESPONSE', response);
 
 	// redirect to front page in case of error
 	if (response.error) {
