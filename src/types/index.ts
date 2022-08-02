@@ -12,3 +12,6 @@ export interface Rankings {
 	ordered_games: string[];
 	user: string;
 }
+export interface WinnerMap {
+	[key: string]: number;
+}
