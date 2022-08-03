@@ -44,7 +44,7 @@
 			arr.push(game);
 		}
 		return arr;
-	}, Array(5));
+	}, []);
 	sortedGameStore.set(sortedGames);
 	const saveVotes = async () => {
 		const vote = $sortedGameStore.reduce((arr: string[], game: Game) => {
@@ -56,7 +56,13 @@
 			returning: 'minimal'
 		});
 		if (error) console.log(error);
+		saved = true;
+		setTimeout(() => {
+			saved = false;
+		}, 5000);
 	};
+
+	let saved = false;
 </script>
 
 <main>
@@ -74,6 +80,9 @@
 		</div>
 	{/if}
 	<button on:click={saveVotes}>Save your votes</button>
+	{#if saved}
+		<h5>Your votes have been cast</h5>
+	{/if}
 </main>
 
 <style>
@@ -88,7 +97,8 @@
 		font-family: 'Montserrat', sans-serif;
 		flex-flow: column;
 	}
-	h1 {
+	h1,
+	h5 {
 		color: #ffd9d9;
 	}
 	h2 {
