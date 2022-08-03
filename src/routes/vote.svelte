@@ -68,9 +68,11 @@
 	<h2>Sort your games below</h2>
 	<div class={'or'}>or</div>
 	<a title="Log out" href="api/logout">Sign out now</a>
-	<div class="flex">
-		<SortedGames />
-	</div>
+	{#if $sortedGameStore}
+		<div class="flex">
+			<SortedGames />
+		</div>
+	{/if}
 	<button on:click={saveVotes}>Save your votes</button>
 </main>
 

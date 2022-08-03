@@ -9,7 +9,7 @@
 		{game.name}
 	</h4>
 	{#if game.steam_id}
-		<a href="https://store.steampowered.com/app/656350/UnderMine/?snr=1_4_4__43_1">
+		<a href="https://store.steampowered.com/app/{game.steam_id}">
 			<img
 				src="https://cdn.akamai.steamstatic.com/steam/apps/{game.steam_id}/header.jpg?t=1641501972"
 				alt="{game.name} featured image"

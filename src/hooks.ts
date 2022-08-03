@@ -4,9 +4,6 @@ import type { RequestEvent } from '@sveltejs/kit';
 import type { MaybePromise } from '@sveltejs/kit/types/private';
 import { supabase } from '$lib/dbClient';
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-import axios from 'axios';
-
 /** @type {import('@sveltejs/kit').Handle} */
 export async function handle({
 	event,
@@ -17,12 +14,9 @@ export async function handle({
 }) {
 	const cookies = cookie.parse(event.request.headers.get('cookie') || '');
 	if (cookies.refresh_token && !cookies.access_token) {
-		// const discordRequest = await fetch(`${config.host}/api/refresh?code=${cookies.refresh_token}`);
-		const discordRequest = await axios.get(
-			`${config.host}/api/refresh?code=${cookies.refresh_token}`
-		);
+		const discordRequest = await fetch(`${config.host}/api/refresh?code=${cookies.refresh_token}`);
 
-		const discordResponse = await discordRequest.data.json();
+		const discordResponse = await discordRequest.json();
 
 		if (discordResponse.access_token) {
 			const request: Response = await fetch(`https://discordapp.com/api/users/@me`, {
