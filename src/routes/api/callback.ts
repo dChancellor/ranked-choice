@@ -38,8 +38,8 @@ export async function GET(event: RequestEvent) {
 	return {
 		headers: {
 			'set-cookie': [
-				`access_token=${response.access_token}; Path=/; HttpOnly; SameSite=Strict; Expires=${access_token_expires_in}}`,
-				`refresh_token=${response.refresh_token}; Path=/; HttpOnly; SameSite=Strict; Expires=${refresh_token_expires_in}`
+				`access_token=${response.access_token}; Path=/; HttpOnly; SameSite=Lax; Expires=${access_token_expires_in}}`,
+				`refresh_token=${response.refresh_token}; Path=/; HttpOnly; SameSite=Lax; Expires=${refresh_token_expires_in}`
 			],
 			location: '/vote'
 		},
