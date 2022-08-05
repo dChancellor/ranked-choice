@@ -55,7 +55,7 @@
 		let { error } = await supabase.from('rankings').upsert(upsert, {
 			returning: 'minimal'
 		});
-		if (error) console.log(error);
+		if (error) return console.log(error);
 		saved = true;
 		setTimeout(() => {
 			saved = false;
