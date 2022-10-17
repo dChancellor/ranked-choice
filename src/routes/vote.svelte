@@ -20,6 +20,8 @@
 				.select(`*`)
 				.eq('user', event.session.user.username || '')
 				.single();
+			console.log(rankings);
+
 			return {
 				props: { games, user: event.session?.user, rankings }
 			};
@@ -37,7 +39,11 @@
 	export let rankings: Rankings;
 
 	const sortedGames = games.reduce((arr: Game[], game) => {
-		const rank = rankings.ordered_games.findIndex((name) => name === game.name);
+		if (!rankings.ordered_games) {
+			arr.push(game);
+		}
+
+		const rank = rankings.ordered_games?.findIndex((name) => name === game.name);
 		if (rank !== -1) {
 			arr[rank] = game;
 		} else {

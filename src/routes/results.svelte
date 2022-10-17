@@ -58,10 +58,17 @@
 </script>
 
 <script lang="ts">
+	import { onMount } from 'svelte';
+
 	export let user: User;
 	export let winner: string;
-
+	let loading = true;
 	const saveVotes = async () => {};
+	onMount(() => {
+		setTimeout(() => {
+			loading = false;
+		}, 3000);
+	});
 </script>
 
 <main>
@@ -71,12 +78,44 @@
 	/>
 	<h1 style="margin-bottom: .5rem;">Hello, {user.username}!</h1>
 	<a title="Log out" href="api/logout" style="margin-top: 0;">Sign out now</a>
-	<h1 style="margin-top: 2rem;">The winner is...</h1>
-	<h1 style="font-size: 4rem; margin-top: 0rem;">{winner}</h1>
+	<h1 style="margin-top: 2rem;">The winner is</h1>
+	{#if loading}
+		<h1 class="loading" />
+	{:else}
+		<h1 style="font-size: 4rem; margin-top: 0rem;">Tor Eternum</h1>
+	{/if}
 	<a class="return-button" title="Return to vote" href="vote">Return to vote</a>
 </main>
 
 <style>
+	.loading {
+		font-size: 2rem;
+		color: #ffd9d9;
+	}
+	.loading:after {
+		content: ' .';
+		animation: dots 1s steps(5, end) infinite;
+	}
+
+	@keyframes dots {
+		0%,
+		20% {
+			color: rgba(0, 0, 0, 0);
+			text-shadow: 0.25em 0 0 rgba(0, 0, 0, 0), 0.5em 0 0 rgba(0, 0, 0, 0);
+		}
+		40% {
+			color: white;
+			text-shadow: 0.25em 0 0 rgba(0, 0, 0, 0), 0.5em 0 0 rgba(0, 0, 0, 0);
+		}
+		60% {
+			text-shadow: 0.25em 0 0 white, 0.5em 0 0 rgba(0, 0, 0, 0);
+		}
+		80%,
+		100% {
+			text-shadow: 0.25em 0 0 white, 0.5em 0 0 white;
+		}
+	}
+
 	main {
 		background-color: #242424;
 		min-height: 100vh;
